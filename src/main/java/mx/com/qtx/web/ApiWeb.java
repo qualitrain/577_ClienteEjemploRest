@@ -3,8 +3,6 @@ package mx.com.qtx.web;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
-import com.netflix.discovery.shared.Application;
-
 import mx.com.qtx.entidades.Saludo;
 
 @RestController
@@ -30,38 +24,17 @@ public class ApiWeb {
 	
 	@Autowired
 	private RestTemplate restTemplate;
-	
-	@Autowired
-	private EurekaClient eurekaCte;
-	
+		
 	@Autowired
 	private Environment env;
-	
-//	private String urlCte = null;
 	
 	public ApiWeb(){
 		log.info("ApiWeb()");
 	}
 	
-//	@PostConstruct
-//	public void inicializarUrlCte() {
-//		this.urlCte = "http://" + env.getProperty("mx.com.qtx.cliente01") 
-//		              + ":" + env.getProperty("mx.com.qtx.cliente01.port");
-//	
-
 	private String getUrlCte(){
-		String urlCte = "http://";
 		String idServicioCte = env.getProperty("mx.com.qtx.servicio01");
-		Application aplicacion = this.eurekaCte.getApplication(idServicioCte);
-		List<InstanceInfo> instanciasApp = aplicacion.getInstances();
-		if(instanciasApp.size() == 0) {
-			log.error("No hay instancias disponibles del servicio " + idServicioCte);
-			return null;
-		}
-		InstanceInfo instanciaDestino = instanciasApp.get(0);
-		urlCte += instanciaDestino.getHostName() 
-			      + ":"
-			      + instanciaDestino.getPort();
+		String urlCte = "http://" + idServicioCte;
 		return urlCte;
 	}
 	
@@ -110,6 +83,7 @@ public class ApiWeb {
 		}		
 		return listSaludos;
 	}
+	
 	@ExceptionHandler
 	public String manejarError(Exception ex) {
 		String error = ex.getClass().getName() + ":" + ex.getMessage();

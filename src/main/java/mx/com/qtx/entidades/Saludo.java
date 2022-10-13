@@ -3,9 +3,13 @@ package mx.com.qtx.entidades;
 public class Saludo {
 	private String saludo;
 	private String nombre;
+	private String log;
 	
-	public Saludo() {
+	public Saludo(String saludo, String nombre, String log) {
 		super();
+		this.saludo = saludo;
+		this.nombre = nombre;
+		this.log = log;
 	}
 
 	public Saludo(String saludo, String nombre) {
@@ -14,6 +18,18 @@ public class Saludo {
 		this.nombre = nombre;
 	}
 
+	public Saludo() {
+		super();
+	}
+
+	public String getLog() {
+		return log;
+	}
+	
+	public void setLog(String log) {
+		this.log = log;
+	}
+	
 	public String getSaludo() {
 		return saludo;
 	}
@@ -32,8 +48,7 @@ public class Saludo {
 
 	@Override
 	public String toString() {
-		return "Saludo [saludo=" + saludo + ", nombre=" + nombre + "]";
+		return "Saludo [saludo=" + saludo + ", nombre=" + nombre + ", log=" + log + "]";
 	}
-
 	
 }
