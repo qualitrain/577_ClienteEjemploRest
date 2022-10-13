@@ -3,8 +3,6 @@ package mx.com.qtx.web;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +35,10 @@ public class ApiWeb {
 	@Autowired
 	private Environment env;
 	
-//	private String urlCte = null;
-	
 	public ApiWeb(){
 		log.info("ApiWeb()");
 	}
 	
-//	@PostConstruct
-//	public void inicializarUrlCte() {
-//		this.urlCte = "http://" + env.getProperty("mx.com.qtx.cliente01") 
-//		              + ":" + env.getProperty("mx.com.qtx.cliente01.port");
-//	
-
 	private String getUrlCte(){
 		String urlCte = "http://";
 		String idServicioCte = env.getProperty("mx.com.qtx.servicio01");
