@@ -42,16 +42,14 @@ public class ApiWeb {
 	private String getUrlCte(){
 		String urlCte = "http://";
 		String idServicioCte = env.getProperty("mx.com.qtx.servicio01");
-		Application aplicacion = this.eurekaCte.getApplication(idServicioCte);
-		List<InstanceInfo> instanciasApp = aplicacion.getInstances();
-		if(instanciasApp.size() == 0) {
-			log.error("No hay instancias disponibles del servicio " + idServicioCte);
-			return null;
-		}
-		InstanceInfo instanciaDestino = instanciasApp.get(0);
-		urlCte += instanciaDestino.getHostName() 
-			      + ":"
-			      + instanciaDestino.getPort();
+//		Application aplicacion = this.eurekaCte.getApplication(idServicioCte);
+//		List<InstanceInfo> instanciasApp = aplicacion.getInstances();
+//		if(instanciasApp.size() == 0) {
+//			log.error("No hay instancias disponibles del servicio " + idServicioCte);
+//			return null;
+//		}
+//		InstanceInfo instanciaDestino = instanciasApp.get(0);
+		urlCte += idServicioCte;
 		return urlCte;
 	}
 	
