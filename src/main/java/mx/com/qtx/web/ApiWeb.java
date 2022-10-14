@@ -27,19 +27,24 @@ public class ApiWeb {
 	@Autowired
 	private Environment env;
 	
-	@Autowired
-	private EurekaClient eurekaCte;
+//	@Autowired
+//	private EurekaClient eurekaCte;
+	
+//	private String getUrlCte() {
+//		String nomServicio = env.getProperty("mx.com.qtx.servicio01"); // como se llama el servicio
+//		Application appServicio = this.eurekaCte.getApplication(nomServicio);
+//		List<InstanceInfo> instancias = appServicio.getInstances();
+//		if(instancias.size() == 0)
+//			return null;
+//		InstanceInfo instanciaElegida = instancias.get(0);
+//		String host = instanciaElegida.getHostName();
+//		int puerto = instanciaElegida.getPort();
+//		return "http://" + host + ":" + puerto;
+//	}
 	
 	private String getUrlCte() {
 		String nomServicio = env.getProperty("mx.com.qtx.servicio01"); // como se llama el servicio
-		Application appServicio = this.eurekaCte.getApplication(nomServicio);
-		List<InstanceInfo> instancias = appServicio.getInstances();
-		if(instancias.size() == 0)
-			return null;
-		InstanceInfo instanciaElegida = instancias.get(0);
-		String host = instanciaElegida.getHostName();
-		int puerto = instanciaElegida.getPort();
-		return "http://" + host + ":" + puerto;
+		return "http://" + nomServicio;
 	}
 			
 	@GetMapping(path = "/testServicio", produces = MediaType.APPLICATION_JSON_VALUE)
