@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import mx.com.qtx.entidades.Saludo;
 
 @RestController
@@ -50,6 +52,7 @@ public class ApiWeb {
 		return saludo;
 	}
 
+	@HystrixCommand(fallbackMethod = "probarGetArregloEmergencia")
 	@GetMapping(path = "/testArreglo", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Saludo> probarGetArreglo() {
 		
@@ -62,6 +65,10 @@ public class ApiWeb {
 		nPeticion++;
 		System.out.print("(" + nPeticion + ") ");
 		System.out.println("objeto recuperado de " + Url + " es " + listSaludos);
+		return listSaludos;
+	}
+	public List<Saludo> probarGetArregloEmergencia() {
+		List<Saludo> listSaludos = Arrays.asList(new Saludo("Servicio no disponible","",""));
 		return listSaludos;
 	}
 	
